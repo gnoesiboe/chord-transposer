@@ -1,0 +1,11 @@
+.transpose-form-component {
+    padding: 20px;
+}
+
+.form-inline input {
+    margin: 5px 5px;
+}
+
+.transpose-form-component .row {
+    margin-bottom: 10px;
+}
