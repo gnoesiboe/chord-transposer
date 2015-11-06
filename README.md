@@ -1,6 +1,4 @@
-# react-flux-bootstrap
-
-Bootstrap for setting-up react-flux applications.
+# Chord transposer
 
 ## Usage
 
