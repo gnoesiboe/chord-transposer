@@ -1,6 +1,6 @@
-# react-flux-bootstrap
+# Chord transposer
 
-Bootstrap for setting-up react-flux applications.
+Tool to transpose chords, build with React and Flux in javascript.
 
 ## Usage
 
