@@ -70,17 +70,17 @@ module.exports = React.createClass({
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-sm-4 col-xs-12">
+                    <div className="col-sm-4 col-sm-offset-0 col-xs-8 col-xs-offset-2">
                         <ChordOverviewComponent chords={this.state.chords}/>
                         <AddChordComponent />
                     </div>
-                    <div className="col-sm-4 col-xs-12">
+                    <div className="col-sm-4 col-sm-offset-0 col-xs-8 col-xs-offset-2">
                         <ChordsWithCapoComponent chords={this.state.chords}
                                                  transposition={this.state.transposition}
                                                  capo={this.state.capo}
                                                  displayType={this.state.displayType}/>
                     </div>
-                    <div className="col-sm-4 col-xs-12">
+                    <div className="col-sm-4 col-sm-offset-0 col-xs-8 col-xs-offset-2">
                         <ChordResultsComponent chords={this.state.chords}
                                                transposition={this.state.transposition}
                                                displayType={this.state.displayType}/>
