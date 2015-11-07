@@ -1,6 +1,6 @@
 /**
- * @param sharp
- * @param flat
+ * @param {String} sharp
+ * @param {String} flat
  *
  * @constructor
  */

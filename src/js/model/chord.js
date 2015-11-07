@@ -10,7 +10,7 @@ var keyStore = require('./../store/keyStore'),
  */
 var Chord = function (name, addition) {
     this.id = idGenerator.generate();
-    this.name = name.toUpperCase();
+    this.name = name[0].toUpperCase() + (name.length > 1 ? name.substr(1) : '');
     this.addition = addition || null;
 };
 
