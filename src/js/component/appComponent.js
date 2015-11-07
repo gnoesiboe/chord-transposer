@@ -4,7 +4,8 @@ var React = require('react'),
     contextStore = require('./../store/contextStore'),
     ChordResultsComponent = require('./chordResultsComponent'),
     TransposeFormComponent = require('./transposeFormComponent'),
-    AddChordComponent = require('./addChordComponent');
+    AddChordComponent = require('./addChordComponent'),
+    ChordsWithCapoComponent = require('./chordsWithCapoComponent');
 
 module.exports = React.createClass({
 
@@ -69,15 +70,19 @@ module.exports = React.createClass({
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-xs-6 col-sm-4 col-sm-offset-2">
+                    <div className="col-sm-4 col-xs-12">
                         <ChordOverviewComponent chords={this.state.chords}/>
                         <AddChordComponent />
                     </div>
-                    <div className="col-xs-6 col-sm-4">
+                    <div className="col-sm-4 col-xs-12">
                         <ChordResultsComponent chords={this.state.chords}
                                                transposition={this.state.transposition}
-                                               capo={this.state.capo}
                                                displayType={this.state.displayType}/>
+                    </div>
+                    <div className="col-sm-4 col-xs-12">
+                        <ChordsWithCapoComponent chords={this.state.chords}
+                                                 transposition={this.state.transposition}
+                                                 capo={this.state.capo}/>
                     </div>
                 </div>
                 <hr />

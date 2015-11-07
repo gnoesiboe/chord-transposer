@@ -30,8 +30,8 @@ module.exports = React.createClass({
 
         var title = chord.name;
 
-        if (typeof this.props.transposition !== 'undefined' && typeof this.props.capo !== 'undefined') {
-            title = chord.transpose(this.props.transposition, this.props.displayType, this.props.capo);
+        if (typeof this.props.transposition !== 'undefined') {
+            title = chord.transpose(this.props.transposition, this.props.displayType, this.props.capo || 0);
         }
 
         var close = this.props.displayClose

@@ -49,7 +49,7 @@ module.exports = React.createClass({
 
         return (
             <div className="chord-overview-component text-center">
-                <h3>Input</h3>
+                <h3>Given..</h3>
                 {results}
                 <p className="clearfix hidden-print">
                     <a href="#" className="pull-right" onClick={this.onClearClick}>clear</a>

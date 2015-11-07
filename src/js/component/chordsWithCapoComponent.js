@@ -16,6 +16,7 @@ module.exports = React.createClass({
                 <li className="list-group-item" key={'results_' + chord.id}>
                     <ChordComponent chord={chord}
                                     transposition={this.props.transposition}
+                                    capo={this.props.capo}
                                     displayType={this.props.displayType}/>
                 </li>
             )
@@ -31,10 +32,9 @@ module.exports = React.createClass({
             );
         }
 
-
         return (
-            <div className="chord-results-component text-center">
-                <h3>Transposed..</h3>
+            <div className="chords-with-capo-component  text-center">
+                <h3>Playing..</h3>
                 {results}
             </div>
         );
