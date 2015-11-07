@@ -34,7 +34,7 @@ module.exports = React.createClass({
 
         return (
             <div className="chord-results-component text-center">
-                <h3>Transposed..</h3>
+                <h3>Hearing..</h3>
                 {results}
             </div>
         );

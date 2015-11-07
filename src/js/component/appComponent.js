@@ -75,14 +75,15 @@ module.exports = React.createClass({
                         <AddChordComponent />
                     </div>
                     <div className="col-sm-4 col-xs-12">
+                        <ChordsWithCapoComponent chords={this.state.chords}
+                                                 transposition={this.state.transposition}
+                                                 capo={this.state.capo}
+                                                 displayType={this.state.displayType}/>
+                    </div>
+                    <div className="col-sm-4 col-xs-12">
                         <ChordResultsComponent chords={this.state.chords}
                                                transposition={this.state.transposition}
                                                displayType={this.state.displayType}/>
-                    </div>
-                    <div className="col-sm-4 col-xs-12">
-                        <ChordsWithCapoComponent chords={this.state.chords}
-                                                 transposition={this.state.transposition}
-                                                 capo={this.state.capo}/>
                     </div>
                 </div>
                 <hr />
