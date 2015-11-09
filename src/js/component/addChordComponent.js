@@ -106,7 +106,7 @@ module.exports = React.createClass({
 
     /**
      * @param {Object} option
-     * 
+     *
      * @returns {XML}
      */
     renderPresetSelectOption: function (option) {
@@ -117,7 +117,7 @@ module.exports = React.createClass({
         return (
             <div>
                 <strong>{option.label}</strong><br />
-                <p class="text-muted">{chordsInPreset}</p>
+                <p className="text-muted">{chordsInPreset}</p>
             </div>
         );
     },
