@@ -105,6 +105,24 @@ module.exports = React.createClass({
     },
 
     /**
+     * @param {Object} option
+     * 
+     * @returns {XML}
+     */
+    renderPresetSelectOption: function (option) {
+        var preset = this.state.presets.findOneById(option.value);
+
+        var chordsInPreset = preset.chords.join(', ');
+
+        return (
+            <div>
+                <strong>{option.label}</strong><br />
+                <p class="text-muted">{chordsInPreset}</p>
+            </div>
+        );
+    },
+
+    /**
      * @returns {XML}
      */
     render: function () {
@@ -121,7 +139,9 @@ module.exports = React.createClass({
         return (
             <div className="add-chord-component hidden-print">
                 <div className="form-group spacer-bottom-small">
-                    <SelectComponent options={presetOptions} onChange={this.onPresetChange} />
+                    <SelectComponent options={presetOptions}
+                                     onChange={this.onPresetChange}
+                                     optionRenderer={this.renderPresetSelectOption}/>
                 </div>
                 <form action="#" className="form" onSubmit={this.onSubmit}>
                     <div className="form-group spacer-bottom-small">
