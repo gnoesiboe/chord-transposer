@@ -2,7 +2,8 @@ var React = require('react'),
     appDispatcher = require('./../utility/appDispatcher'),
     actionFactory = require('./../utility/actionFactory'),
     actionConstants = require('./../constants/actionConstants'),
-    presetStore = require('./../store/presetStore');
+    presetStore = require('./../store/presetStore'),
+    SelectComponent = require('react-select');
 
 module.exports = React.createClass({
 
@@ -82,18 +83,17 @@ module.exports = React.createClass({
      */
     onNameChange: function (event) {
         this.setState({
-            name: event.target.value,
-            currentPresetId: 0
+            name: event.target.value
         });
     },
 
     /**
-     * @param {Object} event
+     * @param {String} presetId
      *
      * @private
      */
-    onPresetChange: function (event) {
-        var preset = this.state.presets.findOneById(event.target.value);
+    onPresetChange: function (presetId) {
+        var preset = this.state.presets.findOneById(presetId);
 
         if (preset === null) {
             return;
@@ -102,40 +102,26 @@ module.exports = React.createClass({
         appDispatcher.dispatch(
             actionFactory.buildApplyChordPresetAction(preset.chords)
         );
-
-        this.resetSelect();
-    },
-
-    /**
-     * @private
-     */
-    resetSelect: function () {
-        this.setState({
-            currentPresetId: 0
-        });
     },
 
     /**
      * @returns {XML}
      */
     render: function () {
-        var error = this.state.error ? <div className="help-block text-danger">{this.state.error}</div> : null,
-            presetOptions = [<option value="0" key={0}>presets</option>];
+        var error = this.state.error ? <div className="help-block text-danger">{this.state.error}</div> : null;
 
+        var presetOptions = [];
         this.state.presets.each(function (preset) {
-            presetOptions.push(
-                <option value={preset.id} key={preset.id}>
-                    {preset.name}
-                </option>
-            );
+            presetOptions.push({
+                value: preset.id,
+                label: preset.name
+            });
         });
 
         return (
             <div className="add-chord-component hidden-print">
                 <div className="form-group spacer-bottom-small">
-                    <select className="form-control" value={this.state.currentPresetId} onChange={this.onPresetChange}>
-                        {presetOptions}
-                    </select>
+                    <SelectComponent options={presetOptions} onChange={this.onPresetChange} />
                 </div>
                 <form action="#" className="form" onSubmit={this.onSubmit}>
                     <div className="form-group spacer-bottom-small">
