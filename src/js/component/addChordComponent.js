@@ -76,9 +76,11 @@ module.exports = React.createClass({
     },
 
     /**
+     * @param {Object} event
+     *
      * @private
      */
-    onNameChange: function () {
+    onNameChange: function (event) {
         this.setState({
             name: event.target.value,
             currentPresetId: 0
@@ -86,10 +88,12 @@ module.exports = React.createClass({
     },
 
     /**
+     * @param {Object} event
+     *
      * @private
      */
-    onPresetChange: function () {
-        var preset = this.state.presets.findOneById(event.target.value)
+    onPresetChange: function (event) {
+        var preset = this.state.presets.findOneById(event.target.value);
 
         if (preset === null) {
             return;
@@ -128,12 +132,12 @@ module.exports = React.createClass({
 
         return (
             <div className="add-chord-component hidden-print">
+                <div className="form-group spacer-bottom-small">
+                    <select className="form-control" value={this.state.currentPresetId} onChange={this.onPresetChange}>
+                        {presetOptions}
+                    </select>
+                </div>
                 <form action="#" className="form" onSubmit={this.onSubmit}>
-                    <div className="form-group spacer-bottom-small">
-                        <select className="form-control" value={this.state.currentPresetId} onChange={this.onPresetChange}>
-                            {presetOptions}
-                        </select>
-                    </div>
                     <div className="form-group spacer-bottom-small">
                         <input type="text"
                                placeholder="Add chord.."
