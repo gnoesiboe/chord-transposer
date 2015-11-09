@@ -49,6 +49,18 @@ var actionFactory = {
     },
 
     /**
+     * @param {String[]} chords
+     *
+     * @returns {Object}
+     */
+    buildApplyChordPresetAction: function (chords) {
+        return _.extend({}, _blueprint, {
+            type: actionConstants.APPLY_CHORD_PRESET,
+            chords: chords
+        });
+    },
+
+    /**
      * @param {Number} newValue
      *
      * @returns {Object}

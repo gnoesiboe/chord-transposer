@@ -58,15 +58,13 @@ var _persistCollection = function () {
  * @private
  */
 var _handleAddChordAction = function (action) {
-    var match = action.name.match(/^([a-g]{1}[#b]{0,1})(.*)$/i);
+    var chord = _createChordFromName(action.name);
 
-    if (match === null) {
+    if (chord === null) {
         return;
     }
 
-    _chords.push(
-        new Chord(match[1], match[2])
-    );
+    _chords.push(chord);
 
     _persistCollection();
 
@@ -78,7 +76,7 @@ var _handleAddChordAction = function (action) {
  *
  * @private
  */
-_handleRemoveChordAction = function (action) {
+var _handleRemoveChordAction = function (action) {
     var indexToRemove = null;
 
     for (var i = 0, l = _chords.length; i < l; i++) {
@@ -105,7 +103,7 @@ _handleRemoveChordAction = function (action) {
  *
  * @private
  */
-_handleClearChordsAction = function (action) {
+var _handleClearChordsAction = function (action) {
     _chords = [];
 
     _persistCollection();
@@ -122,6 +120,44 @@ var _emitChange = function () {
     }
 };
 
+/**
+ * @param {String} name
+ *
+ * @returns {Chord|null}
+ *
+ * @private
+ */
+var _createChordFromName = function (name) {
+    var match = name.match(/^([a-g]{1}[#b]{0,1})(.*)$/i);
+
+    if (match === null) {
+        return null;
+    }
+
+    return new Chord(match[1], match[2]);
+};
+
+/**
+ * @param {Object} action
+ *
+ * @private
+ */
+var _handleApplyChordPresetAction = function (action) {
+    for (var i = 0, l = action.chords.length; i < l; i++) {
+        var chord = _createChordFromName(action.chords[i]);
+
+        if (chord === null) {
+            continue;
+        }
+
+        _chords.push(chord);
+    }
+
+    _persistCollection();
+
+    _emitChange();
+};
+
 appDispatcher.register(function (action) {
     switch (action.type) {
         case actionConstants.ADD_CHORD:
@@ -134,6 +170,10 @@ appDispatcher.register(function (action) {
 
         case actionConstants.CLEAR_CHORDS:
             _handleClearChordsAction(action);
+            break;
+
+        case actionConstants.APPLY_CHORD_PRESET:
+            _handleApplyChordPresetAction(action);
             break;
 
         default:

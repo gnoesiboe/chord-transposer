@@ -1,7 +1,8 @@
 var React = require('react'),
     appDispatcher = require('./../utility/appDispatcher'),
     actionFactory = require('./../utility/actionFactory'),
-    actionConstants = require('./../constants/actionConstants');
+    actionConstants = require('./../constants/actionConstants'),
+    presetStore = require('./../store/presetStore');
 
 module.exports = React.createClass({
 
@@ -20,7 +21,8 @@ module.exports = React.createClass({
     getDefaultState: function () {
         return {
             name: null,
-            error: null
+            error: null,
+            presets: presetStore.getAll()
         };
     },
 
@@ -66,6 +68,9 @@ module.exports = React.createClass({
         }
     },
 
+    /**
+     * @private
+     */
     clearForm: function () {
         this.setState(this.getDefaultState());
     },
@@ -75,7 +80,34 @@ module.exports = React.createClass({
      */
     onNameChange: function () {
         this.setState({
-            name: event.target.value
+            name: event.target.value,
+            currentPresetId: 0
+        });
+    },
+
+    /**
+     * @private
+     */
+    onPresetChange: function () {
+        var preset = this.state.presets.findOneById(event.target.value)
+
+        if (preset === null) {
+            return;
+        }
+
+        appDispatcher.dispatch(
+            actionFactory.buildApplyChordPresetAction(preset.chords)
+        );
+
+        this.resetSelect();
+    },
+
+    /**
+     * @private
+     */
+    resetSelect: function () {
+        this.setState({
+            currentPresetId: 0
         });
     },
 
@@ -83,17 +115,33 @@ module.exports = React.createClass({
      * @returns {XML}
      */
     render: function () {
-        var error = this.state.error ? <div className="help-block text-danger">{this.state.error}</div> : null;
+        var error = this.state.error ? <div className="help-block text-danger">{this.state.error}</div> : null,
+            presetOptions = [<option value="0" key={0}>presets</option>];
+
+        this.state.presets.each(function (preset) {
+            presetOptions.push(
+                <option value={preset.id} key={preset.id}>
+                    {preset.name}
+                </option>
+            );
+        });
 
         return (
             <div className="add-chord-component hidden-print">
                 <form action="#" className="form" onSubmit={this.onSubmit}>
-                    <input type="text"
-                           placeholder="Add chord.."
-                           className="form-control"
-                           onChange={this.onNameChange}
-                           value={this.state.name}/>
-                    {error}
+                    <div className="form-group spacer-bottom-small">
+                        <select className="form-control" value={this.state.currentPresetId} onChange={this.onPresetChange}>
+                            {presetOptions}
+                        </select>
+                    </div>
+                    <div className="form-group spacer-bottom-small">
+                        <input type="text"
+                               placeholder="Add chord.."
+                               className="form-control"
+                               onChange={this.onNameChange}
+                               value={this.state.name}/>
+                        {error}
+                    </div>
                 </form>
             </div>
         );

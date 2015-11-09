@@ -9,3 +9,11 @@
 .transpose-form-component .row {
     margin-bottom: 10px;
 }
+
+.spacer-bottom-small {
+    margin-bottom: 10px;
+}
+
+.spacer-bottom-medium {
+    margin-bottom: 20px;
+}

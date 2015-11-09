@@ -8,7 +8,7 @@ var KeyCollection = function (items) {
     /**
      * @type {Array}
      */
-    this._items = items;
+    this._presets = items;
 };
 
 /**
@@ -17,8 +17,8 @@ var KeyCollection = function (items) {
  * @returns {Number}
  */
 KeyCollection.prototype.indexOf = function (key) {
-    for (var i = 0, l = this._items.length; i < l; i++) {
-        var item = this._items[i];
+    for (var i = 0, l = this._presets.length; i < l; i++) {
+        var item = this._presets[i];
 
         if (item.flat === key || item.sharp === key) {
             return i;
@@ -34,14 +34,14 @@ KeyCollection.prototype.indexOf = function (key) {
  * @returns {Key}
  */
 KeyCollection.prototype.get = function (index) {
-    return this._items[index];
+    return this._presets[index];
 };
 
 /**
  * @return {Number}
  */
 KeyCollection.prototype.count = function () {
-    return this._items.length;
+    return this._presets.length;
 };
 
 module.exports = KeyCollection;

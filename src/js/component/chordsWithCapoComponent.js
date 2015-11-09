@@ -13,7 +13,7 @@ module.exports = React.createClass({
             var chord = this.props.chords[i];
 
             listItems.push(
-                <li className="list-group-item" key={'results_' + chord.id}>
+                <li className="list-group-item" key={'capo_' + chord.id}>
                     <ChordComponent chord={chord}
                                     transposition={this.props.transposition}
                                     capo={this.props.capo}
